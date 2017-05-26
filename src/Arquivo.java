@@ -21,6 +21,8 @@ public class Arquivo {
     private FileInputStream stream;
     private InputStreamReader streamReader;
     private BufferedReader reader;
+    private String nextLine;
+    private char nextCaracter;
     
     
     //stream
@@ -34,77 +36,91 @@ public class Arquivo {
         }
     }    
     
-    public BufferedReader getReader() throws FileNotFoundException {
+    public BufferedReader getBufferedReader() throws FileNotFoundException {
         return reader;
     }
     
     public String getNextLine() throws IOException {
-        return reader.readLine();
+        nextLine = reader.readLine();
+        return nextLine;
     }
     
     public char getNextCaracter() throws IOException {
-        return (char) reader.read();
+        nextCaracter = (char) reader.read();
+        return nextCaracter;
     }
     
-    public String getTuplas() throws FileNotFoundException, IOException {
-        BufferedReader reader = getReader();
+    public boolean hasNextLine() throws IOException {
+        return reader.ready();
+    }
+    
+    
+    public List<List<Estado>> getTuplas() throws FileNotFoundException, IOException {
+        BufferedReader reader = getBufferedReader();
         List<List<Estado>> tuplas = new ArrayList<>();
         List<Estado> estados = new ArrayList<>();
         
-        T_estados = 4;
-        for(int i = 0; i < T_estados; i++) {
-		aux[i] = malloc(T_alfabeto * sizeof(tupla));
-		if(aux[i] == NULL) {
-			fprintf(stderr, "out of memory\n");
-			exit(-1);
-		}
-	}
-        
+        int T_estados = 4;
+        int T_alfabeto = 6;
         
         int i = 0;
-        int js = 0;
+        int j = 0;
         
-        //while (!feof(arq)) {
-        while (reader.ready()) {
-            
-            //fscanf(arq,"%d,%c,%c\n",&aux[j][i].estado, &aux[j][i].alfa, &aux[j][i].comando);
-            Estado estado = new Estado();
-            estado.setEstado(readEstado());
-            estado.setAlfabeto(readAlfabeto());
-            estado.setComando(readComando());
-            
-            tuplas.add(
-                new Estado(
-                        
-                )
-            );
-            printf("%2d,%2c,%2d\t",aux[j][i].estado, aux[j][i].alfa, aux[j][i].comando);
+        //cria
+        for(int l = 0; l < T_estados; l++) {
+	
+            //while (!feof(arq)) {
+            while ( hasNextLine() ) {
+                
+                //pegando a proxima linha
+                getNextLine();
+                
+                //fscanf(arq,"%d,%c,%c\n",&aux[j][i].estado, &aux[j][i].alfa, &aux[j][i].comando);
+                Estado estado = new Estado();
+                estado.setEstado(getEstado());
+                estado.setAlfabeto(getAlfabeto());
+                estado.setComando(getComando());
+                
+                estados.add(estado);
 
-            i++;
+                //printf("%2d,%2c,%2d\t",aux[j][i].estado, aux[j][i].alfa, aux[j][i].comando);
 
-            if( i == T_alfabeto ) {
-                    printf("\n");
+                i++;
+
+                if( i == T_alfabeto ) {
+                    System.out.println("\n");
+                    //printf("\n");
                     i=0;
                     j++;
-            }
+                }
 
-            //scanf("%d", &T);
-	}
+                //scanf("%d", &T);
+            }
+            
+            tuplas.add(estados);
+        }
+        return tuplas;
     }
     
-    public int readEstado() throws IOException {
-        char e = (char) reader.read();
-        String ec = String.valueOf(e);
-        return Integer.parseInt(ec);
+    //E - estado, A - alfabeto, C - comando
+    private String ArrayEAC(int pos) throws IOException {
+        String[] arr = nextLine.split(",");
+        return arr[pos];
     }
     
-    public char readAlfabeto() throws IOException {
-        char a = (char) reader.read();
-        return a;
+    public int getEstado() throws IOException {
+        String a = ArrayEAC(0);
+        int e = Integer.parseInt(ArrayEAC(0));
+        return e;
     }
     
-    public char readComando() throws IOException {
-        char c = (char) reader.read();
-        return c;
+    public char getAlfabeto() throws IOException {
+        char[] e =  ArrayEAC(1).toCharArray();
+        return e[0];
+    }
+    
+    public char getComando() throws IOException {
+        char[] e = ArrayEAC(2).toCharArray();
+        return e[0];
     }
 }

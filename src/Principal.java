@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.List;
 
 
 /**
@@ -23,7 +24,7 @@ public class Principal {
 //abertura do arquivo
         try {
             arquivo = new Arquivo();
-            reader = arquivo.getReader();
+            reader = arquivo.getBufferedReader();
         } catch(FileNotFoundException fnf) {
             System.out.println(fnf.getMessage());
             return;
@@ -35,7 +36,7 @@ public class Principal {
         ArrayList<Estado> estados = new ArrayList<>();
        
         int c = 1;
-        String EA = reader.readLine();
+        String EA = arquivo.getNextLine();
         String a[] = EA.split(" ");
         qtEstado = Integer.parseInt(a[0]);
         qtAlfabeto = Integer.parseInt(a[1]);
@@ -49,23 +50,17 @@ public class Principal {
             if( !(caracter == ' ') ) {
                 alf.add(String.valueOf(caracter));
             }    
-        //}
-            
-//if()
-//            printf("%7c%9c",c,' ');
-//            alf[(int)c] = i;
-//            i++;
-//            if( i > T_alfabeto)
-//            {
-//            printf("BRANCO DE FITA NÃO ENCONTRADO\n");
-//            exit(-1);
-//}
-                
         } while(caracter != '~');
-        for (String af : alf) {
-            System.out.println(af);
+        arquivo.getNextLine();
+        
+        List<List<Estado>> tuplas = arquivo.getTuplas();
+        for( i = 0; i < tuplas.size(); i++) {
+            for(int z = 0; z < tuplas.get(i).size(); z++) {
+                System.out.print(tuplas.get(i).get(z).getEstado() + " ");
+                System.out.print(tuplas.get(i).get(z).getAlfabeto() + " ");
+                System.out.println(tuplas.get(i).get(z).getComando());
+            }    
         }
-    
         
     }
 }

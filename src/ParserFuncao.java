@@ -45,7 +45,7 @@ public class ParserFuncao {
         //abertura do arquivo
         try {
             arquivo = new Arquivo();
-            reader = arquivo.getReader();
+            reader = arquivo.getBufferedReader();
         } catch(FileNotFoundException fnf) {
             System.out.println(fnf.getMessage());
             return "";
