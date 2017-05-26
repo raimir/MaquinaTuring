@@ -10,7 +10,7 @@ typedef struct {
 	char comando;
 } tupla;
 
-tupla** parser( short *alf ) {
+tupla **parser( short *alf ) {
  
 	FILE *arq;
 	int i=0;
