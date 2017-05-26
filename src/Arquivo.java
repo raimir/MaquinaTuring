@@ -18,17 +18,21 @@ import java.util.List;
  * @author Jonatan
  */
 public class Arquivo {
-    private FileInputStream stream;
-    private InputStreamReader streamReader;
-    private BufferedReader reader;
-    private String nextLine;
+    private FileInputStream stream = null;
+    private InputStreamReader streamReader = null;
+    private BufferedReader reader = null;
+    private  List<List<Estado>> tuplas = null;
+    private String[] alfabeto = null;
+    private String nextLine = null;
+    private String lineEA = null;
+    private String lineAlf = null;
+    private  int qtdEstados;
+    private  int qtdAlfabeto;
     private char nextCaracter;
-    private final int qtdEstados;
-    private final int qtdAlfabeto;
     
     
     //stream
-    public Arquivo() throws FileNotFoundException{
+    public Arquivo() throws FileNotFoundException {
         try {
             stream = new FileInputStream(".\\Resorces\\arq.txt");
             streamReader = new InputStreamReader(stream);
@@ -57,23 +61,31 @@ public class Arquivo {
     }
     
     
-    public List<List<Estado>> getTuplas() throws FileNotFoundException, IOException {
+    public void readArquivo() throws FileNotFoundException, IOException {
         BufferedReader reader = getBufferedReader();
-        List<List<Estado>> tuplas = new ArrayList<>();
+        tuplas = new ArrayList<>();
         List<Estado> estados = new ArrayList<>();
         
-        int T_estados = 4;
-        int T_alfabeto = 6;
+        //iniciando a linha de qtd de estados e alfabeto
+        lineEA = getNextLine();
+        
+        //qtd de estado e alfabeto
+        getQtdEstados();
+        getQtdAlfabeto();
+        
+        System.out.println("Qtd Estado: " + qtdEstados);
+        System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
+        
+        //pegando o alfabeto
+        lineAlf = getNextLine();
         
         int i = 0;
         int j = 0;
         
         //cria
-        for(int l = 0; l < T_estados; l++) {
+        for(int l = 0; l < qtdEstados; l++) {
 	
-            //while (!feof(arq)) {
             while ( hasNextLine() ) {
-                
                 //pegando a proxima linha
                 getNextLine();
                 
@@ -82,14 +94,12 @@ public class Arquivo {
                 estado.setEstado(getEstado());
                 estado.setAlfabeto(getAlfabeto());
                 estado.setComando(getComando());
-                
                 estados.add(estado);
 
                 //printf("%2d,%2c,%2d\t",aux[j][i].estado, aux[j][i].alfa, aux[j][i].comando);
-
                 i++;
 
-                if( i == T_alfabeto ) {
+                if( i == qtdAlfabeto ) {
                     System.out.println("\n");
                     //printf("\n");
                     i=0;
@@ -101,7 +111,8 @@ public class Arquivo {
             
             tuplas.add(estados);
         }
-        return tuplas;
+        
+        printTuplas();
     }
     
     //E - estado, A - alfabeto, C - comando
@@ -127,13 +138,31 @@ public class Arquivo {
     }
     
     public int getQtdEstados() {
-        String[] nl = nextLine.split(" ");
-        qtdEstado = qtEstado = Integer.parseInt(a[0]);
-        qtAlfabeto = Integer.parseInt(a[1]);
+        String[] nl = lineEA.split(" ");
+        qtdEstados = Integer.parseInt(nl[0]);
         return qtdEstados;
     }
     
-    public int getQtdCaracteres(){
+    public int getQtdAlfabeto(){
+        String[] nl = lineEA.split(" ");
+        qtdAlfabeto = Integer.parseInt(nl[1]);
         return qtdAlfabeto;
+    }
+    
+    public List<List<Estado>> getTuplas() {
+        return tuplas;
+    }
+    
+    private void printTuplas() {
+        List<List<Estado>> tuplas = getTuplas();
+        
+        for(int i = 0; i < tuplas.size(); i++) {
+            for(int z = 0; z < tuplas.get(i).size(); z++) {
+                System.out.print(tuplas.get(i).get(z).getEstado() + ",");
+                System.out.print(tuplas.get(i).get(z).getAlfabeto() + ",");
+                System.out.print(tuplas.get(i).get(z).getComando() +"\t");
+            } 
+            System.out.println("\n");
+        }
     }
 }
