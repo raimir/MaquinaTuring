@@ -22,7 +22,7 @@ public class Arquivo {
     private InputStreamReader streamReader = null;
     private BufferedReader reader = null;
     private  List<List<Estado>> tuplas = null;
-    private String[] alfabeto = null;
+    private List<String> alfabeto = null;
     private String nextLine = null;
     private String lineEA = null;
     private String lineAlf = null;
@@ -77,7 +77,7 @@ public class Arquivo {
         System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
         
         //pegando o alfabeto
-        lineAlf = getNextLine();
+        createListaAlfabeto();
         
         int i = 0;
         int j = 0;
@@ -105,7 +105,6 @@ public class Arquivo {
                     i=0;
                     j++;
                 }
-
                 //scanf("%d", &T);
             }
             
@@ -153,8 +152,30 @@ public class Arquivo {
         return tuplas;
     }
     
+    public List<String> getListaAlfabeto() {
+        return alfabeto;
+    }
+    
+    private void createListaAlfabeto() throws IOException {
+        lineAlf = getNextLine();
+        alfabeto = new ArrayList<>();
+        String[] alf = lineAlf.split(" ");
+        
+        for (int i = 0; i < alf.length; i++) {
+            alfabeto.add(alf[i]);
+        }
+    }
+    
     private void printTuplas() {
         List<List<Estado>> tuplas = getTuplas();
+        List<String> listaAlfa = getListaAlfabeto();
+        
+        for (int i = 0; i < listaAlfa.size(); i++) {
+           System.out.print(listaAlfa.get(i) + "\t");
+        }
+        System.out.println("");
+        
+        
         
         for(int i = 0; i < tuplas.size(); i++) {
             for(int z = 0; z < tuplas.get(i).size(); z++) {
