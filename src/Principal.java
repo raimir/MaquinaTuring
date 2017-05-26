@@ -15,48 +15,49 @@ import java.util.Scanner;
  */
 public class Principal {
     
-    
-    
     public static void main (String [] args) throws IOException {
-        
-        Arquivo arquivo;
-        BufferedReader reader;
-        Scanner sc = new Scanner(System.in);
-        int count = 0;
+        int cabecote;
+	int estAtual;
+	int alfaAtual;
+	int comandoAtual;
+	//char entrada[255];
         String values[] = new String[99]; 
-        
-        //abertura do arquivo
-        try {
-            arquivo = new Arquivo();
-            reader = arquivo.getBufferedReader();
-        } catch(FileNotFoundException fnf) {
-            System.out.println(fnf.getMessage());
-            return;
-        }
-        
         int qtEstado = 0;
         int qtAlfabeto = 0;
         char caracter = '~';
         ArrayList<Estado> estados = new ArrayList<>();
-       
-        int c = 1;
-        String EA = arquivo.getNextLine();
-        String a[] = EA.split(" ");
-        qtEstado = Integer.parseInt(a[0]);
-        qtAlfabeto = Integer.parseInt(a[1]);
-        System.out.println("Quantidade de Estado:" + qtEstado);
-        System.out.println("Quantidade de Alfabeto:" +qtAlfabeto);
+        int count = 1;
         
-        ArrayList<String> alf = new ArrayList<>();
-        int i = 0;
-        do {
-            caracter = arquivo.getNextCaracter();
-            if( !(caracter == ' ') ) {
-                alf.add(String.valueOf(caracter));
-            }    
-        } while(caracter != '~');
-        arquivo.getNextLine();
+        Arquivo arquivo;
+        BufferedReader reader;
+        Scanner sc = new Scanner(System.in);
+//        while(true){
+            String s = sc.next();
+            for (int i = 0; i < s.length(); i++) {
+                String a = s.substring(i, i+1);
+                
+            }
+            
+            
+            
+//            if(s.equals("~")){                
+//                break;
+//            } else{
+//                values[count] = s;
+//            }
+//            count++;
+//        }
         
+        if(true) return;
+        
+        //abertura do arquivo
+        try {
+            arquivo = new Arquivo();
+            arquivo.readArquivo();
+        } catch(FileNotFoundException fnf) {
+            System.out.println(fnf.getMessage());
+            return;
+        }
         
         while(true){
             String s = sc.next();
@@ -69,14 +70,25 @@ public class Principal {
             count++;
         }
         
-        List<List<Estado>> tuplas = arquivo.getTuplas();
-        for( i = 0; i < tuplas.size(); i++) {
-            for(int z = 0; z < tuplas.get(i).size(); z++) {
-                System.out.print(tuplas.get(i).get(z).getEstado() + " ");
-                System.out.print(tuplas.get(i).get(z).getAlfabeto() + " ");
-                System.out.println(tuplas.get(i).get(z).getComando());
-            }    
+        //switch( tuplas[ estAtual ][ alfabeto[alfaAtual] ].comando ) {
+        int x = 10;
+        switch(x) {
+            case (Comando.R.getValor()):
+                cabecote++;
+                break;
+            case (Comando.L.getValor()):
+                cabecote--;
+                break;
+            case (Comando.P.getValor()):
+                comandoAtual = P;
+                System.out.println("RECONHECIDO ");
+                break;
+            default:
+                comandoAtual = P;
+                System.out.println("ERROR");
+                break;
+            }
         }
-        
-    }
 }
+
+
