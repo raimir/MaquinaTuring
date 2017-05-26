@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 /**
@@ -20,8 +21,11 @@ public class Principal {
         
         Arquivo arquivo;
         BufferedReader reader;
+        Scanner sc = new Scanner(System.in);
+        int count = 0;
+        String values[] = new String[99]; 
         
-//abertura do arquivo
+        //abertura do arquivo
         try {
             arquivo = new Arquivo();
             reader = arquivo.getBufferedReader();
@@ -52,6 +56,18 @@ public class Principal {
             }    
         } while(caracter != '~');
         arquivo.getNextLine();
+        
+        
+        while(true){
+            String s = sc.next();
+            
+            if(s.equals("~")){                
+                break;
+            } else{
+                values[count] = s;
+            }
+            count++;
+        }
         
         List<List<Estado>> tuplas = arquivo.getTuplas();
         for( i = 0; i < tuplas.size(); i++) {
