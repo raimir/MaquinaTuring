@@ -23,6 +23,8 @@ public class Arquivo {
     private BufferedReader reader;
     private String nextLine;
     private char nextCaracter;
+    private final int qtdEstados;
+    private final int qtdAlfabeto;
     
     
     //stream
@@ -122,5 +124,16 @@ public class Arquivo {
     public char getComando() throws IOException {
         char[] e = ArrayEAC(2).toCharArray();
         return e[0];
+    }
+    
+    public int getQtdEstados() {
+        String[] nl = nextLine.split(" ");
+        qtdEstado = qtEstado = Integer.parseInt(a[0]);
+        qtAlfabeto = Integer.parseInt(a[1]);
+        return qtdEstados;
+    }
+    
+    public int getQtdCaracteres(){
+        return qtdAlfabeto;
     }
 }
