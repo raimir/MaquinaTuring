@@ -10,12 +10,12 @@
  */
 public class Estado {
     private int estado;
-    private char alfabeto;
-    private char comando;
+    private String alfabeto;
+    private String comando;
     
     public Estado() {}
     
-    public Estado(int estado, char alfabeto, char comando) {
+    public Estado(int estado, String alfabeto, String comando) {
         this.estado = estado;
         this.alfabeto = alfabeto;
         this.comando = comando;
@@ -29,19 +29,19 @@ public class Estado {
         this.estado = estado;
     }
 
-    public char getAlfabeto() {
+    public String getAlfabeto() {
         return alfabeto;
     }
 
-    public void setAlfabeto(char alfabeto) {
+    public void setAlfabeto(String alfabeto) {
         this.alfabeto = alfabeto;
     }
 
-    public char getComando() {
+    public String getComando() {
         return comando;
     }
 
-    public void setComando(char comando) {
+    public void setComando(String comando) {
         this.comando = comando;
     }
 }

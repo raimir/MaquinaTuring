@@ -145,3 +145,7 @@ int main() {
 	free(tuplas);
 	return 0;
 }
+
+
+//https://gutodisse.wordpress.com/2015/10/26/maquina-de-turing-em-c/
+//exemplo de entradas

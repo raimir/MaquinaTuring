@@ -21,7 +21,7 @@ public class Arquivo {
     private FileInputStream stream = null;
     private InputStreamReader streamReader = null;
     private BufferedReader reader = null;
-    private  List<List<Estado>> tuplas = null;
+    private List<List<Estado>> tuplas = null;
     private List<String> alfabeto = null;
     private String nextLine = null;
     private String lineEA = null;
@@ -100,6 +100,9 @@ public class Arquivo {
         }
         
         printTuplas();
+        
+        //fechando arquivo
+        reader.close();
     }
     
     public int getQtdEstados() {
@@ -130,14 +133,12 @@ public class Arquivo {
         return e;
     }
     
-    private char getAlfabeto() throws IOException {
-        char[] e =  ArrayEAC(1).toCharArray();
-        return e[0];
+    private String getAlfabeto() throws IOException {
+        return ArrayEAC(1);
     }
     
-    private char getComando() throws IOException {
-        char[] e = ArrayEAC(2).toCharArray();
-        return e[0];
+    private String getComando() throws IOException {
+        return ArrayEAC(2);
     }
     
     private void createQtdEstadoAlfabeto() throws IOException {
@@ -161,9 +162,9 @@ public class Arquivo {
         List<List<Estado>> ctuplas = getTuplas();
         List<String> listaAlfa = getListaAlfabeto();
         
-        System.out.println("Qtd Estado: " + qtdEstados);
-        System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
-        System.out.println("");
+        System.out.println("\tEstado\tAlfabeto");
+        System.out.print("Qtd\t"  + qtdEstados + "\t" + qtdAlfabeto);
+        System.out.println("\n");
         
         System.out.print("Estado\t\t\t");
         System.out.println("Alfabeto");
@@ -171,7 +172,7 @@ public class Arquivo {
         for (int i = 0; i < listaAlfa.size(); i++) {
            System.out.print(listaAlfa.get(i) + "\t");
         }
-        System.out.println("\n");
+        System.out.println("");
         
         for(int i = 0; i < ctuplas.size(); i++) {
             System.out.print("q" + i + "\t");
