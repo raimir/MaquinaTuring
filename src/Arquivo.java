@@ -165,13 +165,16 @@ public class Arquivo {
         System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
         System.out.println("");
         
-        System.out.println("Alfabeto:");
+        System.out.print("Estado\t\t\t");
+        System.out.println("Alfabeto");
+        System.out.print("q\t");
         for (int i = 0; i < listaAlfa.size(); i++) {
            System.out.print(listaAlfa.get(i) + "\t");
         }
         System.out.println("\n");
         
         for(int i = 0; i < ctuplas.size(); i++) {
+            System.out.print("q" + i + "\t");
             for(int z = 0; z < ctuplas.get(i).size(); z++) {
                 System.out.print(ctuplas.get(i).get(z).getEstado() + ",");
                 System.out.print(ctuplas.get(i).get(z).getAlfabeto() + ",");

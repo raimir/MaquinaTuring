@@ -36,9 +36,9 @@ public class Principal {
         }
         
 //        while(true){
-            String s = sc.next();
-            for (int i = 0; i < s.length(); i++) {
-                String a = s.substring(i, i+1);
+//            String s = sc.next();
+//            for (int i = 0; i < s.length(); i++) {
+//                String a = s.substring(i, i+1);
                 
                 //switch( tuplas[ estAtual ][ alfabeto[alfaAtual] ].comando ) {
 //                int x = 10;
@@ -59,7 +59,7 @@ public class Principal {
 //                        break;
 //                    }
 //                }
-            }
+//            }
 
             if(true) return;
     }
