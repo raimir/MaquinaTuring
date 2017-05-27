@@ -122,7 +122,7 @@ public class MaquinaTuring {
             
             System.out.println("");
             System.out.println("Para parar o programa digite \"stop\"");
-            System.out.print("Digite uma entrada");
+            System.out.print("Digite uma entrada: ");
 	}
     }
     
