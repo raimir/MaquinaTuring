@@ -20,35 +20,11 @@ public class Principal {
 	int estAtual;
 	int alfaAtual;
 	int comandoAtual;
-	//char entrada[255];
-        String values[] = new String[99]; 
-        int qtEstado = 0;
-        int qtAlfabeto = 0;
-        char caracter = '~';
-        ArrayList<Estado> estados = new ArrayList<>();
-        int count = 1;
+	int count = 1;
         
         Arquivo arquivo;
         BufferedReader reader;
         Scanner sc = new Scanner(System.in);
-//        while(true){
-            String s = sc.next();
-            for (int i = 0; i < s.length(); i++) {
-                String a = s.substring(i, i+1);
-                
-            }
-            
-            
-            
-//            if(s.equals("~")){                
-//                break;
-//            } else{
-//                values[count] = s;
-//            }
-//            count++;
-//        }
-        
-        if(true) return;
         
         //abertura do arquivo
         try {
@@ -59,36 +35,34 @@ public class Principal {
             return;
         }
         
-        while(true){
+//        while(true){
             String s = sc.next();
-            
-            if(s.equals("~")){                
-                break;
-            } else{
-                values[count] = s;
+            for (int i = 0; i < s.length(); i++) {
+                String a = s.substring(i, i+1);
+                
+                //switch( tuplas[ estAtual ][ alfabeto[alfaAtual] ].comando ) {
+//                int x = 10;
+//                switch(cabecote) {
+//                    case Comando.R.getValor():
+//                        cabecote++;
+//                        break;
+//                    case Comando.L.getValor():
+//                        cabecote--;
+//                        break;
+//                    case Comando.P.getValor():
+//                        comandoAtual = Comando.P.getValor();
+//                        System.out.println("RECONHECIDO ");
+//                        break;
+//                    default:
+//                        comandoAtual = Comando.P.getValor();
+//                        System.out.println("ERROR");
+//                        break;
+//                    }
+//                }
             }
-            count++;
-        }
-        
-        //switch( tuplas[ estAtual ][ alfabeto[alfaAtual] ].comando ) {
-        int x = 10;
-        switch(x) {
-            case (Comando.R.getValor()):
-                cabecote++;
-                break;
-            case (Comando.L.getValor()):
-                cabecote--;
-                break;
-            case (Comando.P.getValor()):
-                comandoAtual = P;
-                System.out.println("RECONHECIDO ");
-                break;
-            default:
-                comandoAtual = P;
-                System.out.println("ERROR");
-                break;
-            }
-        }
+
+            if(true) return;
+    }
 }
 
 

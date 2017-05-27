@@ -38,7 +38,8 @@ tupla **parser( short *alf ) {
 	do {
 		fscanf(arq,"%c ",&c);
 		printf("%7c%9c",c,' ');
-		alf[(int)c] = i;
+		//?? ainda não entendi esse alfabeto
+                alf[(int)c] = i;
 		i++;
 		
 		if( i > T_alfabeto) {
@@ -47,8 +48,9 @@ tupla **parser( short *alf ) {
 		}
 	}while(c != '~');
  
-	aux = malloc(sizeof(tupla *) * T_estados);
-
+	aux = malloc(T_estados * sizeof(tupla *));
+        
+        //falta de memória
 	if(aux == NULL) {
 		fprintf(stderr, "out of memory\n");
 		exit(-1);
@@ -57,8 +59,8 @@ tupla **parser( short *alf ) {
 	for(i = 0; i < T_estados; i++) {
 		aux[i] = malloc(T_alfabeto * sizeof(tupla));
 		if(aux[i] == NULL) {
-			fprintf(stderr, "out of memory\n");
-			exit(-1);
+                    fprintf(stderr, "out of memory\n");
+                    exit(-1);
 		}
 	}
  
@@ -66,19 +68,19 @@ tupla **parser( short *alf ) {
 	printf("\n");
 
 	while (!feof(arq)) {
-		fscanf(arq,"%d,%c,%c\n",&aux[j][i].estado, &aux[j][i].alfa, &aux[j][i].comando);
-		
-		printf("%2d,%2c,%2d\t",aux[j][i].estado, aux[j][i].alfa, aux[j][i].comando);
-		
-		i++;
-		
-		if( i == T_alfabeto ) {
-			printf("\n");
-			i=0;
-			j++;
-		}
-	 
-		//scanf("%d", &T);
+            fscanf(arq,"%d,%c,%c\n",&aux[j][i].estado, &aux[j][i].alfa, &aux[j][i].comando);
+
+            printf("%2d,%2c,%2d\t",aux[j][i].estado, aux[j][i].alfa, aux[j][i].comando);
+
+            i++;
+
+            if( i == T_alfabeto ) {
+                printf("\n");
+                i=0;
+                j++;
+            }
+
+            //scanf("%d", &T);
 	}
  
 	fclose(arq);

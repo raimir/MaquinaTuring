@@ -26,8 +26,8 @@ public class Arquivo {
     private String nextLine = null;
     private String lineEA = null;
     private String lineAlf = null;
-    private  int qtdEstados;
-    private  int qtdAlfabeto;
+    private  int qtdEstados = 0;
+    private  int qtdAlfabeto = 0;
     private char nextCaracter;
     
     
@@ -67,15 +67,7 @@ public class Arquivo {
         List<Estado> estados = new ArrayList<>();
         
         //iniciando a linha de qtd de estados e alfabeto
-        lineEA = getNextLine();
-        
-        //qtd de estado e alfabeto
-        getQtdEstados();
-        getQtdAlfabeto();
-        
-        System.out.println("Qtd Estado: " + qtdEstados);
-        System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
-        
+        createQtdEstadoAlfabeto();
         //pegando o alfabeto
         createListaAlfabeto();
         
@@ -101,9 +93,9 @@ public class Arquivo {
 
                 if( i == qtdAlfabeto ) {
                     System.out.println("\n");
-                    //printf("\n");
                     i=0;
                     j++;
+                    break;
                 }
                 //scanf("%d", &T);
             }
@@ -116,7 +108,7 @@ public class Arquivo {
     
     //E - estado, A - alfabeto, C - comando
     private String ArrayEAC(int pos) throws IOException {
-        String[] arr = nextLine.split(",");
+        String[] arr = lineEA.split(" ");
         return arr[pos];
     }
     
@@ -136,24 +128,11 @@ public class Arquivo {
         return e[0];
     }
     
-    public int getQtdEstados() {
-        String[] nl = lineEA.split(" ");
-        qtdEstados = Integer.parseInt(nl[0]);
-        return qtdEstados;
-    }
-    
-    public int getQtdAlfabeto(){
+    private void createQtdEstadoAlfabeto() throws IOException {
+        lineEA = getNextLine();
         String[] nl = lineEA.split(" ");
         qtdAlfabeto = Integer.parseInt(nl[1]);
-        return qtdAlfabeto;
-    }
-    
-    public List<List<Estado>> getTuplas() {
-        return tuplas;
-    }
-    
-    public List<String> getListaAlfabeto() {
-        return alfabeto;
+        qtdEstados = Integer.parseInt(nl[0]);
     }
     
     private void createListaAlfabeto() throws IOException {
@@ -166,9 +145,29 @@ public class Arquivo {
         }
     }
     
+    public int getQtdEstados() {
+        return qtdEstados;
+    }
+    
+    public int getQtdAlfabeto(){
+        return qtdAlfabeto;
+    }
+    
+    public List<List<Estado>> getTuplas() {
+        return tuplas;
+    }
+    
+    public List<String> getListaAlfabeto() {
+        return alfabeto;
+    }
+    
     private void printTuplas() {
-        List<List<Estado>> tuplas = getTuplas();
+        List<List<Estado>> ctuplas = getTuplas();
         List<String> listaAlfa = getListaAlfabeto();
+        
+        System.out.println("Qtd Estado: " + qtdEstados);
+        System.out.println("Qtd Alfabeto: " + qtdAlfabeto);
+        
         
         for (int i = 0; i < listaAlfa.size(); i++) {
            System.out.print(listaAlfa.get(i) + "\t");
@@ -176,14 +175,14 @@ public class Arquivo {
         System.out.println("");
         
         
-        
-        for(int i = 0; i < tuplas.size(); i++) {
-            for(int z = 0; z < tuplas.get(i).size(); z++) {
-                System.out.print(tuplas.get(i).get(z).getEstado() + ",");
-                System.out.print(tuplas.get(i).get(z).getAlfabeto() + ",");
-                System.out.print(tuplas.get(i).get(z).getComando() +"\t");
+        for(int i = 0; i < ctuplas.size(); i++) {
+            for(int z = 0; z < ctuplas.get(i).size(); z++) {
+//                System.out.println("i: " + i + " z: " + z);
+                System.out.print(ctuplas.get(i).get(z).getEstado() + ",");
+                System.out.print(ctuplas.get(i).get(z).getAlfabeto() + ",");
+                System.out.print(ctuplas.get(i).get(z).getComando() +"\t");
             } 
-            System.out.println("\n");
+            System.out.println("");
         }
     }
 }
